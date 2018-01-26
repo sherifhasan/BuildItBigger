@@ -1,6 +1,11 @@
 package com.udacity.gradle.builditbigger.backend;
 
-/** The object model for the data we are sending through endpoints */
+import com.example.Joker;
+import com.google.api.server.spi.config.ApiMethod;
+
+/**
+ * The object model for the data we are sending through endpoints
+ */
 public class MyBean {
 
     private String myData;
@@ -12,4 +17,6 @@ public class MyBean {
     public void setData(String data) {
         myData = data;
     }
+
+
 }
