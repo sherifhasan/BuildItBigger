@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My AndroidLibrary</string>
+    <string name="intent">intent_android</string>
+    <string name="no_jokes">No jokes found</string>
+</resources>
