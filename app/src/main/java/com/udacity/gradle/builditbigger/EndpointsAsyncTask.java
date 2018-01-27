@@ -1,10 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.example.myandroidlibrary.DisplayJokesActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -17,12 +15,13 @@ import java.io.IOException;
  * Created by sheri on 1/27/2018.
  */
 
-class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private MainActivityFragment fragment;
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected String doInBackground(MainActivityFragment... params) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -40,7 +39,8 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
             myApiService = builder.build();
         }
-        context = params[0];
+        fragment = params[0];
+        context = fragment.getActivity();
 
         try {
             return myApiService.tellJoke().execute().getData();
@@ -51,9 +51,8 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, DisplayJokesActivity.class);
-        intent.putExtra("from_backend", result);
-        context.startActivity(intent);
+        fragment.setResultedJoke(result);
+        fragment.passDataToLib();
     }
 }
 
