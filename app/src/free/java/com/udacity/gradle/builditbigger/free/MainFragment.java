@@ -1,7 +1,6 @@
 package com.udacity.gradle.builditbigger.free;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.example.myandroidlibrary.DisplayJokesActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
@@ -25,9 +23,6 @@ import com.udacity.gradle.builditbigger.R;
  * A placeholder fragment containing a simple view.
  */
 public class MainFragment extends Fragment {
-
-    String resultedJoke;
-    public boolean testingBoolean = false;
 
     public MainFragment() {
     }
@@ -56,21 +51,6 @@ public class MainFragment extends Fragment {
         return root;
     }
 
-    public String getResultedJoke() {
-        return resultedJoke;
-    }
-
-    public void setResultedJoke(String resultedJoke) {
-        this.resultedJoke = resultedJoke;
-    }
-
-    public void passDataToLib() {
-        if (!testingBoolean) {
-            Intent intent = new Intent(getActivity(), DisplayJokesActivity.class);
-            intent.putExtra(getActivity().getString(R.string.intent), resultedJoke);
-            getActivity().startActivity(intent);
-        }
-    }
 
     public void getJoke(View view) {
 
