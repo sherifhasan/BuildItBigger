@@ -1,8 +1,13 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.util.Pair;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.example.myandroidlibrary.DisplayJokesActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -15,13 +20,19 @@ import java.io.IOException;
  * Created by sheri on 1/27/2018.
  */
 
-class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
-    private MainActivityFragment fragment;
+
+    private ProgressBar mProgressBar;
+
+    public EndpointsAsyncTask(ProgressBar progressBar, Context context) {
+        this.mProgressBar = progressBar;
+        this.context = context;
+    }
 
     @Override
-    protected String doInBackground(MainActivityFragment... params) {
+    protected final String doInBackground(Pair<Context, String>... params) {
         if (myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -39,9 +50,7 @@ class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
             myApiService = builder.build();
         }
-        fragment = params[0];
-        context = fragment.getActivity();
-
+        context = params[0].first;
         try {
             return myApiService.tellJoke().execute().getData();
         } catch (IOException e) {
@@ -50,9 +59,22 @@ class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
     }
 
     @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     protected void onPostExecute(String result) {
-        fragment.setResultedJoke(result);
-        fragment.passDataToLib();
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.GONE);
+        }
+        Intent intent = new Intent(context, DisplayJokesActivity.class);
+        intent.putExtra(DisplayJokesActivity.INTENT_KEY, result);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }
 

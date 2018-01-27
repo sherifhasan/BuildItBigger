@@ -1,4 +1,5 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.free;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,27 +8,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.myandroidlibrary.DisplayJokesActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
+import com.udacity.gradle.builditbigger.R;
 
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainFragment extends Fragment {
 
     String resultedJoke;
     public boolean testingBoolean = false;
 
-    public MainActivityFragment() {
+    public MainFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
+        final View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         AdView mAdView = root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -42,7 +50,7 @@ public class MainActivityFragment extends Fragment {
         jokesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getJoke();
+                getJoke(root);
             }
         });
         return root;
@@ -64,7 +72,10 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    public void getJoke() {
-        new EndpointsAsyncTask().execute(this);
+    public void getJoke(View view) {
+
+        ProgressBar progressBar = view.findViewById(R.id.progress_bar);
+        EndpointsAsyncTask task = new EndpointsAsyncTask(progressBar, getContext());
+        task.execute();
     }
 }
