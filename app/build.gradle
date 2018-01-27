@@ -13,7 +13,7 @@ buildscript {
 android {
     compileSdkVersion 27
     buildToolsVersion "26.0.3"
-    flavorDimensions "default"
+    flavorDimensions "versionCode"
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
