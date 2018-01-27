@@ -212,5 +212,9 @@
     <orderEntry type="module" module-name="myandroidlibrary" />
     <orderEntry type="module" module-name="javalib" />
     <orderEntry type="module" module-name="myandroidlibrary" />
+    <orderEntry type="module" module-name="javalib" />
+    <orderEntry type="module" module-name="myandroidlibrary" />
+    <orderEntry type="module" module-name="javalib" />
+    <orderEntry type="module" module-name="myandroidlibrary" />
   </component>
 </module>

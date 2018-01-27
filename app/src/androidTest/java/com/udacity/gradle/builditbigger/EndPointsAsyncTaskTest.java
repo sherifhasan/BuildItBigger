@@ -8,8 +8,8 @@ import android.util.Log;
  */
 public class EndPointsAsyncTaskTest extends AndroidTestCase {
 
-    public void test() {
-        String result = null;
+    public void testAsyncTask() {
+        String result = "";
         EndpointsAsyncTask asyncTask = new EndpointsAsyncTask(null, getContext());
         asyncTask.execute();
         try {

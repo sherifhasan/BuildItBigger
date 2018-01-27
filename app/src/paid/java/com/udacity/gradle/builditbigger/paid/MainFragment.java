@@ -39,7 +39,6 @@ public class MainFragment extends Fragment {
     }
 
     public void getJoke(View view) {
-
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         EndpointsAsyncTask task = new EndpointsAsyncTask(progressBar, getContext());
         task.execute();
