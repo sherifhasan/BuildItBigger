@@ -1,6 +1,5 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +19,7 @@ import com.google.android.gms.ads.AdView;
 public class MainActivityFragment extends Fragment {
 
     String resultedJoke;
+    public boolean testingBoolean = false;
 
     public MainActivityFragment() {
     }
@@ -57,15 +57,14 @@ public class MainActivityFragment extends Fragment {
     }
 
     public void passDataToLib() {
-        Context context = getActivity();
-        Intent intent = new Intent(context, DisplayJokesActivity.class);
-        intent.putExtra(context.getString(R.string.intent), resultedJoke);
-        context.startActivity(intent);
+        if (!testingBoolean) {
+            Intent intent = new Intent(getActivity(), DisplayJokesActivity.class);
+            intent.putExtra(getActivity().getString(R.string.intent), resultedJoke);
+            getActivity().startActivity(intent);
+        }
     }
 
     public void getJoke() {
         new EndpointsAsyncTask().execute(this);
     }
-
-
 }

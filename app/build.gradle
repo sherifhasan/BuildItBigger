@@ -50,4 +50,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     compile project(path: ':javalib')
     compile project(path: ':myandroidlibrary')
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'com.android.support:support-annotations:27.0.2'
 }
