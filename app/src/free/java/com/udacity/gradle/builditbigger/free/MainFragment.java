@@ -14,7 +14,6 @@ import com.google.android.gms.ads.AdView;
 import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
 import com.udacity.gradle.builditbigger.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -51,9 +50,7 @@ public class MainFragment extends Fragment {
         return root;
     }
 
-
     public void getJoke(View view) {
-
         ProgressBar progressBar = view.findViewById(R.id.progress_bar);
         EndpointsAsyncTask task = new EndpointsAsyncTask(progressBar, getContext());
         task.execute();

@@ -16,7 +16,7 @@ public class EndPointsAsyncTaskTest extends AndroidTestCase {
             result = asyncTask.get();
             Log.d("success : ", result);
         } catch (Exception e) {
-            Log.d("failed", e.getMessage());
+            fail(e.getMessage());
             e.printStackTrace();
         }
         assertNotNull(result);

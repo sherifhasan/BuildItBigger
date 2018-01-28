@@ -18,17 +18,16 @@ public class DisplayJokesActivity extends AppCompatActivity {
 
     }
 
-
     public void getJokeFromIntent(TextView textView) {
         String joke;
         Intent intent = getIntent();
-        joke = intent.getStringExtra(INTENT_KEY);
-
-        if (joke != null) {
-            textView.setText(joke);
-        } else {
-            textView.setText(getString(R.string.no_jokes));
+        if (intent.hasExtra(INTENT_KEY)) {
+            joke = intent.getStringExtra(INTENT_KEY);
+            if (joke != null) {
+                textView.setText(joke);
+            } else {
+                textView.setText(getString(R.string.no_jokes));
+            }
         }
-
     }
 }

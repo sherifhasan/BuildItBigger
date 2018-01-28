@@ -22,7 +22,6 @@ public class MainFragment extends Fragment {
     public MainFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
